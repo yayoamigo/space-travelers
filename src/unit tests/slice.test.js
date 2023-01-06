@@ -1,26 +1,23 @@
-import missionSlice from "../redux/missions/missions";
-import { fetchMissions } from "../redux/missions/missions";
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import missionSlice, { fetchMissions } from '../redux/missions/missions';
 
 describe('missionSlice', () => {
-    it('should handle the fetchMissions.fulfilled action', () => {
-      // Define the initial state and the payload of the action
-      const initialState = { missions: [] };
-      const payload = [{ mission_id: 48, mission_name: 'Elom', description: 'this is a test' }];
-  
-      // Dispatch the action
-      const state = missionSlice.reducer(initialState, {
-        type: fetchMissions.fulfilled.type,
-        payload,
-      });
-  
-      // Assert that the state was correctly updated
-      expect(state.missions).toEqual([{...payload[0],reserved: false}]);
+  it('should handle the fetchMissions.fulfilled action', () => {
+    // Define the initial state and the payload of the action
+    const initialState = { missions: [] };
+    const payload = [{ mission_id: 48, mission_name: 'Elom', description: 'this is a test' }];
+
+    // Dispatch the action
+    const state = missionSlice.reducer(initialState, {
+      type: fetchMissions.fulfilled.type,
+      payload,
     });
+
+    // Assert that the state was correctly updated
+    expect(state.missions).toEqual([{ ...payload[0], reserved: false }]);
   });
-
-
+});
 
 describe('fetchMissions', () => {
   it('should dispatch the fetchMissions.fulfilled action on success', async () => {
